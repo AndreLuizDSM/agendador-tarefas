@@ -26,7 +26,7 @@ public class TarefaService {
     public TarefaDTO gravarTarefa (TarefaDTO tarefaDTO, String token) {
         String email = extracaoEmail(token);
 
-        tarefaDTO.setDataCriacao(LocalDateTime.now());
+        tarefaDTO.setDataCriacao(LocalDateTime.now().minusHours(3));
         tarefaDTO.setStatusNotificacaoEnum(StatusNotificacaoEnum.PENDENTE);
         tarefaDTO.setEmailUsuario(email);
 
@@ -74,9 +74,10 @@ public class TarefaService {
                     ()-> new ResourceNotFound("id não encontrado" + id));
 
             tarefaUpdateConverter.updateTarefa(tarefaEntity, tarefaDTO);
-            //  repository.save(tarefaEntity);  Jeito simples
-                return tarefaConverter.paraTarefaDTO(repository.save(tarefaEntity));
+            tarefaEntity.setDataAlteracao(LocalDateTime.now().minusHours(3));
 
+            //  repository.save(tarefaEntity);  Jeito simples
+            return tarefaConverter.paraTarefaDTO(repository.save(tarefaEntity));
         }   catch (ResourceNotFound e) {
             throw new ResourceNotFound("id não encontrado " + id, e.getCause());
         }
