@@ -23,6 +23,7 @@ public class TarefaService {
     public final TarefaUpdateConverter tarefaUpdateConverter;
     public final JwtUtil jwtUtil;
 
+    // Gravar as tarefas
     public TarefaDTO gravarTarefa (TarefaDTO tarefaDTO, String token) {
         String email = extracaoEmail(token);
 
@@ -34,6 +35,7 @@ public class TarefaService {
             return tarefaConverter.paraTarefaDTO(repository.save(tarefaEntity));
     }
 
+    // Busca tarefas durante um tempo inicial , e tempo final dado
     public List<TarefaDTO> buscarTarefaGravadaPorPerido(LocalDateTime dataInicial, LocalDateTime dataFinal){
 
         return tarefaConverter.paraListaTarefaDto(
@@ -41,6 +43,7 @@ public class TarefaService {
                                                                             StatusNotificacaoEnum.PENDENTE));
     }
 
+    // Busca todas as tarefas que estão no Email
     public List<TarefaDTO> buscarTarefaGravadaPorEmail(String token) {
         String email = extracaoEmail(token);
 
