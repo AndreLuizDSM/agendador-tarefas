@@ -23,10 +23,11 @@ public class TarefaService {
     public final TarefaUpdateConverter tarefaUpdateConverter;
     public final JwtUtil jwtUtil;
 
+    // Gravar as tarefas
     public TarefaDTO gravarTarefa (TarefaDTO tarefaDTO, String token) {
         String email = extracaoEmail(token);
 
-        tarefaDTO.setDataCriacao(LocalDateTime.now().minusHours(3));
+        tarefaDTO.setDataCriacao(LocalDateTime.now());
         tarefaDTO.setStatusNotificacaoEnum(StatusNotificacaoEnum.PENDENTE);
         tarefaDTO.setEmailUsuario(email);
 
@@ -34,6 +35,7 @@ public class TarefaService {
             return tarefaConverter.paraTarefaDTO(repository.save(tarefaEntity));
     }
 
+    // Busca tarefas durante um tempo inicial , e tempo final dado
     public List<TarefaDTO> buscarTarefaGravadaPorPerido(LocalDateTime dataInicial, LocalDateTime dataFinal){
 
         return tarefaConverter.paraListaTarefaDto(
@@ -41,6 +43,7 @@ public class TarefaService {
                                                                             StatusNotificacaoEnum.PENDENTE));
     }
 
+    // Busca todas as tarefas que estão no Email
     public List<TarefaDTO> buscarTarefaGravadaPorEmail(String token) {
         String email = extracaoEmail(token);
 
@@ -74,10 +77,9 @@ public class TarefaService {
                     ()-> new ResourceNotFound("id não encontrado" + id));
 
             tarefaUpdateConverter.updateTarefa(tarefaEntity, tarefaDTO);
-            tarefaEntity.setDataAlteracao(LocalDateTime.now().minusHours(3));
-
             //  repository.save(tarefaEntity);  Jeito simples
-            return tarefaConverter.paraTarefaDTO(repository.save(tarefaEntity));
+                return tarefaConverter.paraTarefaDTO(repository.save(tarefaEntity));
+
         }   catch (ResourceNotFound e) {
             throw new ResourceNotFound("id não encontrado " + id, e.getCause());
         }
