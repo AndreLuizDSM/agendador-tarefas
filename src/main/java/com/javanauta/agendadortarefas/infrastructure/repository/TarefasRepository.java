@@ -5,14 +5,14 @@ import com.javanauta.agendadortarefas.infrastructure.enums.StatusNotificacaoEnum
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @Repository
 public interface TarefasRepository extends MongoRepository<TarefaEntity, String> {
 
-    List<TarefaEntity> findByDataEventoBetweenAndStatusNotificacaoEnum(LocalDateTime dataInicial,
-                                                                       LocalDateTime dataFinal,
+    List<TarefaEntity> findByDataEventoBetweenAndStatusNotificacaoEnum(OffsetDateTime dataInicial,
+                                                                       OffsetDateTime dataFinal,
                                                                        StatusNotificacaoEnum status);
     List<TarefaEntity> findByEmailUsuario(String email);
 }
