@@ -28,7 +28,7 @@ public class TarefaService {
     public TarefaDTO gravarTarefa (TarefaDTO tarefaDTO, String token) {
         String email = extracaoEmail(token);
 
-        tarefaDTO.setDataCriacao(LocalDateTime.now());
+        tarefaDTO.setDataCriacao(Instant.now());
         tarefaDTO.setStatusNotificacaoEnum(StatusNotificacaoEnum.PENDENTE);
         tarefaDTO.setEmailUsuario(email);
 
@@ -37,7 +37,7 @@ public class TarefaService {
     }
 
     // Busca tarefas durante um tempo inicial , e tempo final dado
-    public List<TarefaDTO> buscarTarefaGravadaPorPerido(Instant dataInicial, Instant dataFinal){
+    public List<TarefaDTO> buscarTarefaGravadaPorPerido(LocalDateTime dataInicial, LocalDateTime dataFinal){
 
         return tarefaConverter.paraListaTarefaDto(
                 repository.findByDataEventoBetweenAndStatusNotificacaoEnum(dataInicial, dataFinal,

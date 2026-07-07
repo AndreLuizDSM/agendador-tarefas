@@ -20,8 +20,8 @@ public class TarefaEntity {
     private String id;
     private String nomeTarefa;
     private String descricao;
-    private LocalDateTime dataCriacao;
-    private Instant dataEvento;
+    private Instant dataCriacao;
+    private LocalDateTime dataEvento;
     private String emailUsuario;
     private LocalDateTime dataAlteracao;
     private StatusNotificacaoEnum statusNotificacaoEnum;
