@@ -5,8 +5,8 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 
 @Getter
 @Setter
@@ -21,7 +21,7 @@ public class TarefaEntity {
     private String nomeTarefa;
     private String descricao;
     private LocalDateTime dataCriacao;
-    private OffsetDateTime dataEvento;
+    private Instant dataEvento;
     private String emailUsuario;
     private LocalDateTime dataAlteracao;
     private StatusNotificacaoEnum statusNotificacaoEnum;
