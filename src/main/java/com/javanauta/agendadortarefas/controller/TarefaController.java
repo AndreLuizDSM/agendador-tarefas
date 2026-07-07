@@ -8,7 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.OffsetDateTime;
+import java.time.Instant;
 import java.util.List;
 
 @RestController
@@ -26,8 +26,8 @@ public class TarefaController {
 
     @GetMapping("/eventos")
     public ResponseEntity<List<TarefaDTO>> buscaListaDeTarefaPorPeriodo(
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)OffsetDateTime dataInicial,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)OffsetDateTime dataFinal){
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)Instant dataInicial,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)Instant dataFinal){
 
         return ResponseEntity.ok(tarefaService.buscarTarefaGravadaPorPerido(dataInicial, dataFinal));
     }

@@ -5,8 +5,8 @@ import com.javanauta.agendadortarefas.infrastructure.enums.StatusNotificacaoEnum
 import lombok.*;
 import org.springframework.data.annotation.Id;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 
 @Getter
 @Setter
@@ -21,7 +21,8 @@ public class TarefaDTO {
     private String descricao;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime dataCriacao;
-    private OffsetDateTime dataEvento;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss", timezone = "UTC")
+    private Instant dataEvento;
     private String emailUsuario;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime dataAlteracao;
