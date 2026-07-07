@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @Service
@@ -36,7 +37,7 @@ public class TarefaService {
     }
 
     // Busca tarefas durante um tempo inicial , e tempo final dado
-    public List<TarefaDTO> buscarTarefaGravadaPorPerido(LocalDateTime dataInicial, LocalDateTime dataFinal){
+    public List<TarefaDTO> buscarTarefaGravadaPorPerido(OffsetDateTime dataInicial, OffsetDateTime dataFinal){
 
         return tarefaConverter.paraListaTarefaDto(
                 repository.findByDataEventoBetweenAndStatusNotificacaoEnum(dataInicial, dataFinal,
