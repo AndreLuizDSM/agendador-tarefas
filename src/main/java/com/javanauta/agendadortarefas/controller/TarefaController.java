@@ -26,8 +26,8 @@ public class TarefaController {
 
     @GetMapping("/eventos")
     public ResponseEntity<List<TarefaDTO>> buscaListaDeTarefaPorPeriodo(
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)Instant dataInicial,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)Instant dataFinal){
+            @RequestParam Instant dataInicial,
+            @RequestParam Instant dataFinal){
 
         return ResponseEntity.ok(tarefaService.buscarTarefaGravadaPorPerido(dataInicial, dataFinal));
     }
