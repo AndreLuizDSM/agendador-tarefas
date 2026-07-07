@@ -11,8 +11,8 @@ import com.javanauta.agendadortarefas.infrastructure.security.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 import java.util.List;
 
 @Service
@@ -37,7 +37,7 @@ public class TarefaService {
     }
 
     // Busca tarefas durante um tempo inicial , e tempo final dado
-    public List<TarefaDTO> buscarTarefaGravadaPorPerido(OffsetDateTime dataInicial, OffsetDateTime dataFinal){
+    public List<TarefaDTO> buscarTarefaGravadaPorPerido(Instant dataInicial, Instant dataFinal){
 
         return tarefaConverter.paraListaTarefaDto(
                 repository.findByDataEventoBetweenAndStatusNotificacaoEnum(dataInicial, dataFinal,
