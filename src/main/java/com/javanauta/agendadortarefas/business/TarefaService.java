@@ -9,6 +9,7 @@ import com.javanauta.agendadortarefas.infrastructure.exceptions.ResourceNotFound
 import com.javanauta.agendadortarefas.infrastructure.repository.TarefasRepository;
 import com.javanauta.agendadortarefas.infrastructure.security.JwtUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class TarefaService {
 
     public final TarefasRepository repository;
@@ -32,8 +34,14 @@ public class TarefaService {
         tarefaDTO.setStatusNotificacaoEnum(StatusNotificacaoEnum.PENDENTE);
         tarefaDTO.setEmailUsuario(email);
 
+
         TarefaEntity tarefaEntity = tarefaConverter.paraTarefaEntity(tarefaDTO);
-            return tarefaConverter.paraTarefaDTO(repository.save(tarefaEntity));
+
+
+        TarefaDTO dto = tarefaConverter.paraTarefaDTO(repository.save(tarefaEntity));
+        log.info("TAREFA DTO CRIADA: {}", dto.getId());
+
+        return dto;
     }
 
     // Busca tarefas durante um tempo inicial , e tempo final dado
